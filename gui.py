@@ -19,14 +19,17 @@ class MyGUI:
         self.listName = Label(self.frame1, text = "How are you feeling? Type happy, ok, or sad.")
         self.listName.grid(row = 0, column = 0)
 
-    #################################### entry
+    #################################### 
         self.enterListName = Entry(self.frame1, text = "Values", width = 20)
         self.enterListName.grid(row = 1, column = 0)
 
+    ###########################################
+        self.resultName = Label(self.frame1, text= "", width=50, height=5, wraplength=300)
+        self.resultName.grid(row = 3, column = 0)
 
     ################################### submit button
         self.submitButton = Button(self.frame1, text = "submit", command = self.process)
-        self.submitButton.grid(row = 1, column = 1)
+        self.submitButton.grid(row = 2, column = 0, pady = 10)
 
 
         mainloop()
@@ -44,18 +47,15 @@ class MyGUI:
             
             '''using parameterized constructor'''
             quoteObject = ChooseQuote(happy, self.enterListName.get(), num)
-            print(quoteObject.chooseQuote())
+            self.resultName.config(text = quoteObject.chooseQuote(), bg = "pink", fg = "blue")
 
         elif self.enterListName.get() == "ok" or self.enterListName.get() == "Ok" or self.enterListName.get() == "OK":
             quoteObject = ChooseQuote(ok, self.enterListName.get(), num)
-            print(quoteObject.chooseQuote())
+            self.resultName.config(text = quoteObject.chooseQuote(), bg = "yellow", fg = "green")
 
         elif self.enterListName.get() == "sad" or self.enterListName.get() == "Sad":
             quoteObject = ChooseQuote(sad, self.enterListName.get(), num)
-            print(quoteObject.chooseQuote())
+            self.resultName.config(text = quoteObject.chooseQuote(), bg = "blue", fg = "orange")
 
         else: 
-            try:
-                print(quoteObject.chooseQuote())
-            except UnboundLocalError: 
-                print("Error")
+            self.resultName.config(text = "Error") 
